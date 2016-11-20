@@ -1,0 +1,20 @@
+* {
+  text-align: center;
+}
+.title {
+  font-family: pirata one;
+}
+
+.choices {
+  /*text-align: left;*/
+}
+
+.hidden {
+  display: none;
+}
+
+.github {
+  margin: 100px;
+  display: inline-block;
+  color: grey;
+}
