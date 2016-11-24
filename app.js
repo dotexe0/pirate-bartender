@@ -51,7 +51,6 @@ $(document).ready(function(event){
   Bartender.prototype.greet = function(name) {
     var name = name.charAt(0).toUpperCase() + name.slice(1); //capitalize Name
      $(".container").prepend("<h2 class='greet'>Welcome to the Pirate Cantine, " + name + "! Let me fix ye a drink!</h2>");
-    //  $(".greet").animate({height:'toggle'}, 1500);
   };
 
   Bartender.prototype.addCustomer = function(customer) {
