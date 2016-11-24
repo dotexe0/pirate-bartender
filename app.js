@@ -50,7 +50,7 @@ $(document).ready(function(event){
 
   Bartender.prototype.greet = function(name) {
     var name = name.charAt(0).toUpperCase() + name.slice(1); //capitalize Name
-     $(".container").prepend("<h5 class='greet'>Welcome to the Pirate Cantine, " + name + "! Let me fix ye a drink!</h5>");
+     $(".container").prepend("<h2 class='greet'>Welcome to the Pirate Cantine, " + name + "! Let me fix ye a drink!</h2>");
     //  $(".greet").animate({height:'toggle'}, 1500);
   };
 
@@ -61,13 +61,12 @@ $(document).ready(function(event){
   //if customer is known, dont ask questions, give him his preferred drink
   Bartender.prototype.checkCustomer = function(name) {
     if (this.customers[name]) {
-      $(".container").append("<h5 class='greet'>Welcome back " + name + "!</h5>");
-      // $(".greet").animate({ height:'toggle' },1500);
+      $(".container").append("<h2 class='greet'>Welcome back " + name + "!</h2>");
       var myDrink = this.customers[name].drink;
       $(".showDrink").remove();
       $(".container").append("<div class='showDrink'>" +
-                             "<h5>Here you go, " + name + "! This is your " + myDrink.name + "! " + "It's made from a " + formatedIngredients(customer) +  ".</h5><div>");
-      $(".showDrink").append("<h5>Would you like another drink?</h5>");
+                             "<h2>Here you go, " + name + "! This is your " + myDrink.name + "! " + "It's made from a " + formatedIngredients(customer) +  ".</h2><div>");
+      $(".showDrink").append("<h2>Would you like another drink?</h2>");
       $(".showDrink").append("<input class='moreDrinks' type='submit' value='Yes'>" +
                              "<input class='noMoreDrinks' type='submit' value='No'>");
       bartender.askMoreDrinks();
@@ -93,7 +92,7 @@ $(document).ready(function(event){
       $(".choices").addClass("hidden");
       bartender.giveDrink();
     } else {
-      $(".question").append("<h5>" + this.questions[currentQuestion].question + "</h5>");
+      $(".question").append("<h2>" + this.questions[currentQuestion].question + "</h2>");
     };
   };
 
@@ -120,8 +119,8 @@ $(document).ready(function(event){
     var myDrink = bartender.makeDrink(pantry, customer.preferences);
     customer.drink = myDrink;
     $(".container").append("<div class='showDrink'>" +
-                           "<h5>Here you go, " + customer.name + "! This is your " + customer.drink.name + "! " + "It's made from a " + formatedIngredients(customer) +  ".</h5><div>");
-    $(".showDrink").append("<h5>Would you like another drink?</h5>" +
+                           "<h2>Here you go, " + customer.name + "! This is your " + customer.drink.name + "! " + "It's made from a " + formatedIngredients(customer) +  ".</h2><div>");
+    $(".showDrink").append("<h2>Would you like another drink?</h2>" +
                            "<input class='moreDrinks' type='submit' value='Yes'>" +
                            "<input class='noMoreDrinks' type='submit' value='No'>");
     bartender.askMoreDrinks();
@@ -134,13 +133,15 @@ $(document).ready(function(event){
     });
     $('.noMoreDrinks').click(function() {
       $(".showDrink").remove();
+      $(".greet").remove();
       $(".inputName").addClass("hidden");
-      $(".container").append("<h5 class='goodbye'>Thank you for stopping by, now get out...</h5>");
+      $(".container").append("<h2 class='goodbye'>Thank you for stopping by, now get out...</h2>");
       $(".container").append("<input id='restart' type='submit' value='Restart'>");
       $('#restart').click(function() {
         $(".showDrink").empty();
         $("#restart").remove();
         $(".goodbye").remove();
+        $(".inputName").find("input[type=text], textarea").val("");
         $(".inputName").removeClass("hidden");
       });
     });
@@ -194,6 +195,8 @@ function formatedIngredients(customer) {
 
   $(".choices").submit(function(event) {
     event.preventDefault();
+    $(".greet").hide(500);
+
     if($(".choice option:selected").text() === "Yes") {
       customer.addPreference(bartender.questions[currentQuestion].property);
     };
